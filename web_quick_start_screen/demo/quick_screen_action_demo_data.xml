@@ -48,7 +48,7 @@
     </record>
     <record id="base.user_demo" model="res.users">
         <field
-            name="groups_id"
+            name="group_ids"
             eval="[Command.link(ref('web_quick_start_screen.group_quick_start_screen'))]"
         />
         <field name="quick_start_screen_id" ref="quick_start_screen_demo" />
