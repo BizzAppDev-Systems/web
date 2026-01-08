@@ -10,7 +10,14 @@ class TestWebNotifyChannelMessage(common.TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.env.user = cls.env.ref("base.user_admin")
-        cls.other_user = cls.env.ref("base.user_demo")
+        cls.other_user = cls.env["res.users"].create(
+            {
+                "name": "Demo User",
+                "login": "demo_user",
+                "password": "demo_user",
+                "email": "mark.brown23@example.com",
+            }
+        )
         cls.env = api.Environment(cls.cr, cls.env.user.id, {})
         cls.env.user.tz = False  # Make sure there's no timezone in user
         cls.user_internal = cls.env["res.users"].create(
