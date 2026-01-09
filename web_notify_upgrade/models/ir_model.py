@@ -3,9 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
-from odoo import _, api, models
+from odoo import api, models
 
-from odoo.addons.bus.models.bus_presence import AWAY_TIMER, DISCONNECTION_TIMER
+from odoo.addons.mail.models.mail_presence import AWAY_TIMER, DISCONNECTION_TIMER
 
 _logger = logging.getLogger(__name__)
 
@@ -36,7 +36,7 @@ class IrModelData(models.Model):
         self.env.cr.execute(
             """
             SELECT user_id
-            FROM bus_presence
+            FROM mail_presence
             WHERE last_poll is not null
                 AND (
                     age(now() AT TIME ZONE 'UTC', last_poll) < interval %s
@@ -50,12 +50,12 @@ class IrModelData(models.Model):
     def _get_upgrade_notification_params(self):
         """Return the parameters to pass to the notify_info method."""
         return dict(
-            message=_(
+            message=self.env._(
                 "Your odoo instance has been upgraded, please reload the web page."
             )
             + "<br />"
             '<button onclick="location.reload(true)" class="btn btn-primary mt-4">'
-            '<i class="fa fa-refresh"></i>' + _("Reload") + "</button>",
-            title=_("Upgrade Notification"),
+            '<i class="fa fa-refresh"></i>' + self.env._("Reload") + "</button>",
+            title=self.env._("Upgrade Notification"),
             sticky=True,
         )
