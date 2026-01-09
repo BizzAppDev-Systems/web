@@ -51,7 +51,7 @@ class IrModelData(models.Model):
         """Return the parameters to pass to the notify_info method."""
         return dict(
             message=_(
-                "Your odoo instance has been upgraded, " "please reload the web page."
+                "Your odoo instance has been upgraded, please reload the web page."
             )
             + "<br />"
             '<button onclick="location.reload(true)" class="btn btn-primary mt-4">'
